@@ -13,6 +13,9 @@
 // Include Headers
 #include <iostream>
 #include <thread>
+#include "compensatorThread.hpp"
+#include "strapdownThread.hpp"
+#include "kalmanFilterThread.hpp"
 
 // Main GPS-INS Function
 int main(int argc, char **argv) {
@@ -24,15 +27,21 @@ int main(int argc, char **argv) {
     // Create ROS Output Publishers
 
     // Measurement Compensator Thread
+    compensatorThread ct;
+    std::thread compensatorThread(&compensatorThread::runCompensatorThread, ct);
 
     // Strapdown Integration Thread
+    strapdownThread st;
+    std::thread strapdownThread(&strapdownThread::runStrapdownThread, st);
 
     // Kalman Filter Thread
+    kalmanFilterThread kft;
+    std::thread kalmanFilterThread(&kalmanFilterThread::runKalmanFilterThread, kft);
 
-    // Terminate Program
-
-    // Temp
-    std::cout << "Temporary Hold - GPS-INS Main Function" << std::endl;
+    // Terminate Program - Close Threads
+    compensatorThread.join();
+    strapdownThread.join();
+    kalmanFilterThread.join();
     
     // Successful Return
     return 0;

@@ -12,8 +12,19 @@ find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 # Add Header List
+set(HEADER_LIST ${PROJECT_SOURCE_DIR}/include/compensatorThread.hpp
+	        ${PROJECT_SOURCE_DIR}/include/strapdownThread.hpp
+		${PROJECT_SOURCE_DIR}/include/kalmanFilterThread.hpp)
+
+# Include Directories
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
 # Add Executable
-add_executable(GpsInsNavigation ${PROJECT_SOURCE_DIR}/src/main.cpp)
+add_executable(GpsInsNavigation ${PROJECT_SOURCE_DIR}/src/main.cpp
+	                        ${PROJECT_SOURCE_DIR}/src/compensatorThread.cpp 
+				${PROJECT_SOURCE_DIR}/src/strapdownThread.cpp
+				${PROJECT_SOURCE_DIR}/src/kalmanFilterThread.cpp ${HEADER_LIST})
+
+# Link Libraries
 
 # Unit Testing Build
