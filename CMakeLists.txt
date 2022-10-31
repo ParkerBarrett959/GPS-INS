@@ -10,6 +10,11 @@ set(CMAKE_CXX_STANDARD 11)
 # External Dependencies
 find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 include_directories(${EIGEN3_INCLUDE_DIR})
+include(FetchContent)
+FetchContent_Declare(NavFuse
+	GIT_REPOSITORY git@github.com:ParkerBarrett959/NavFuse
+	GIT_TAG v1.0)
+FetchContent_MakeAvailable(NavFuse)
 
 # Add Header List
 set(HEADER_LIST ${PROJECT_SOURCE_DIR}/include/compensatorThread.hpp
@@ -26,5 +31,6 @@ add_executable(GpsInsNavigation ${PROJECT_SOURCE_DIR}/src/main.cpp
 				${PROJECT_SOURCE_DIR}/src/kalmanFilterThread.cpp ${HEADER_LIST})
 
 # Link Libraries
+target_link_libraries(GpsInsNavigation navigation)
 
 # Unit Testing Build
