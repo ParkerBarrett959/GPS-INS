@@ -21,9 +21,19 @@ jobs:
       run: sudo apt install libeigen3-dev
     - name: Install CMake
       run: sudo apt-get install cmake
+    - name: Setup SSH Keys
+      env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: |
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "{{ secrets.SSH_PRIVATE_KEY }}"
     - name: Create Build Directory and Run CMake
+      env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: cmake -S . -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
     - name: Build Project
+      env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: cmake --build build --target all --config Release -- -j4
     - name: List Files
       run: ls build/
