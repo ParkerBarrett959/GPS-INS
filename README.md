@@ -6,6 +6,7 @@ GPS-INS is a robust, unit tested C++ implementation of a GPS-Aided Inertial Navi
 
 # Dependencies
 * C++ 11 (or greater) <br />
+* ROS2 <br />
 * CMake (3.22.0 or greater) <br />
 * Eigen (3.3 or greater) <br />
 * GoogleTest <br />
