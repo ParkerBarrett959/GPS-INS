@@ -15,6 +15,10 @@ FetchContent_Declare(NavFuse
 	GIT_REPOSITORY git@github.com:ParkerBarrett959/NavFuse
 	GIT_TAG v1.0)
 FetchContent_MakeAvailable(NavFuse)
+FetchContent_Declare(json
+        GIT_REPOSITORY git@github.com:nlohmann/json
+        GIT_TAG v3.11.2)
+FetchContent_MakeAvailable(json)
 
 # Add Header List
 set(HEADER_LIST ${PROJECT_SOURCE_DIR}/include/compensatorThread.hpp
