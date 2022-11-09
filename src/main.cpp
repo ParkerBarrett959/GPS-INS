@@ -13,6 +13,7 @@
 // Include Headers
 #include <iostream>
 #include <thread>
+#include <queue>
 #include "compensatorThread.hpp"
 #include "strapdownThread.hpp"
 #include "kalmanFilterThread.hpp"
@@ -21,6 +22,14 @@
 int main(int argc, char **argv) {
 
     // Unpack Inputs
+
+    // Create Compensator Queues
+    std::queue<Eigen::Vector3d> deltaVelQueueIn;
+    std::queue<Eigen::Vector3d> deltaThetaQueueIn;
+    std::queue<Eigen::Vector3d> deltaVelQueueOut;
+    std::queue<Eigen::Vector3d> deltaThetaQueueOut;
+
+    // Create Output Queues
     
     // Create ROS Input Subscribers
 
