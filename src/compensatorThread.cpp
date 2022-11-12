@@ -6,7 +6,7 @@
 // Overview:    The Compensator Thread class implementation. Intializes the compensator and then    //
 //              corrects each IMU measurement that arrives for the estimated bias, scale factor     //
 //              and misalignment errors. The compensator takes periodic error estimate updates      //
-//              from the Kalman Filter.                                                          //                                                                         //           
+//              from the Kalman Filter.                                                             //
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -16,12 +16,15 @@
 #include "compensatorThread.hpp"
 
 // Initialize Compensator
-bool compensatorThread::init(Eigen::Vector3d &ba,
-                             Eigen::VectorXd &ma,
-                             Eigen::Vector3d &sfa,
-                             Eigen::Vector3d &bg,
-                             Eigen::VectorXd &mg,
-                             Eigen::Vector3d &sfg) {
+bool compensatorThread::init(imuCalibrationData_t &imuCalibration) {
+
+    // Extract Inputs
+    Eigen::Vector3d ba = imuCalibration.ba;
+    Eigen::Vector3d sfa = imuCalibration.sfa;
+    Eigen::VectorXd ma = imuCalibration.ma;
+    Eigen::Vector3d bg = imuCalibration.bg;
+    Eigen::Vector3d sfg = imuCalibration.sfg;
+    Eigen::VectorXd mg = imuCalibration.mg;
 
     // Set Accelerometer Errors
     if (!compensator_.setAccelerometerErrors(ba, ma, sfa)) {
@@ -44,13 +47,12 @@ bool compensatorThread::init(Eigen::Vector3d &ba,
 bool compensatorThread::runCompensatorThread() {
     
     // Initialize Compensator
-    Eigen::Vector3d ba = Eigen::Vector3d::Zero(); //temp
-    Eigen::VectorXd ma = Eigen::VectorXd::Zero(6); //temp
-    Eigen::Vector3d sfa = Eigen::Vector3d::Zero(); //temp
-    Eigen::Vector3d bg = Eigen::Vector3d::Zero(); //temp
-    Eigen::VectorXd mg = Eigen::VectorXd::Zero(6); //temp
-    Eigen::Vector3d sfg = Eigen::Vector3d::Zero();//temp
-    if (!init(ba, ma, sfa, bg, mg, sfg)) {
+    imuCalibrationData_t imuCalibration;
+    if (!ju_.parseImuCalibrationConfig("../config/imu_calibration_default.json", imuCalibration)) {
+        std::cout << "[compensatorThread::runCompensatorThread] Failed to load compensator data" << std::endl;
+        return false;
+    }
+    if (!init(imuCalibration)) {
         std::cout << "[compensatorThread::runCompensatorThread] Failed to initialize compensator" << std::endl;
         return false;
     }

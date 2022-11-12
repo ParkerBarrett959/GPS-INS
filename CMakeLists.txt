@@ -38,12 +38,15 @@ add_executable(GpsInsNavigation ${PROJECT_SOURCE_DIR}/src/main.cpp
 				${PROJECT_SOURCE_DIR}/src/util/jsonUtilities.cpp ${HEADER_LIST})
 
 # Link Libraries
-target_link_libraries(GpsInsNavigation navigation
-	                               nlohmann_json::nlohmann_json)
+target_link_libraries(
+    GpsInsNavigation
+    navigation
+    nlohmann_json::nlohmann_json)
 
 # Target Include Directories
 target_include_directories(GpsInsNavigation PUBLIC ${PROJECT_SOURCE_DIR}/include
-	                                    PUBLIC ${PROJECT_SOURCE_DIR}/include/util})
+	                                    PUBLIC ${PROJECT_SOURCE_DIR}/include/util}
+					    PUBLIC ${EIGEN_INSTALL_PATH})
 
 # Unit Testing Build
 enable_testing()

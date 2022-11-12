@@ -12,6 +12,7 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include <compensator.hpp>
+#include "jsonUtilities.hpp"
 
 // Compensator Thread Class
 class compensatorThread {
@@ -42,15 +43,12 @@ class compensatorThread {
             Description:
                 Function which initializes the Compensator thread.
         */
-        bool init(Eigen::Vector3d &ba,
-                  Eigen::VectorXd &ma,
-                  Eigen::Vector3d &sfa,
-                  Eigen::Vector3d &bg,
-                  Eigen::VectorXd &mg,
-                  Eigen::Vector3d &sfg);
+        bool init(imuCalibrationData_t &imuCalibration);
 
         // Create Compensator Object
         Compensator compensator_;
 
+        // Create JSON Utility Object
+        jsonUtilities ju_;
 
 };
