@@ -24,7 +24,63 @@ bool jsonUtilities::parseImuCalibrationConfig(const std::string fileName,
         return false;
     }
 
-    // Insert Parsing Here
+    // Get Accelerometer JSON Object
+    json accel = config["accelerometer"];
+
+    // Get Accelerometer Bias, Scale Factor and Misalignment
+    json ba = accel["bias"];
+    json sfa = accel["scale_factor"];
+    json ma = accel["misalignment"];
+
+    // Get Accelerometer Bias and Set Output
+    double ba_X = ba.value("x_body",0.0);
+    double ba_Y = ba.value("y_body",0.0);
+    double ba_Z = ba.value("z_body",0.0);
+    imuCalibration.ba << ba_X, ba_Y, ba_Z;
+
+    // Get Accelerometer Scale factor Error and Set Output
+    double sfa_X = sfa.value("x_body",0.0);
+    double sfa_Y = sfa.value("y_body",0.0);
+    double sfa_Z = sfa.value("z_body",0.0);
+    imuCalibration.sfa << sfa_X, sfa_Y, sfa_Z;
+
+    // Get Accelerometer Misalignment and Set Output
+    double ma_1 = ma.value("m1",0.0);
+    double ma_2 = ma.value("m2",0.0);
+    double ma_3 = ma.value("m3",0.0);
+    double ma_4 = ma.value("m4",0.0);
+    double ma_5 = ma.value("m5",0.0);
+    double ma_6 = ma.value("m6",0.0);
+    imuCalibration.ma<< ma_1, ma_2, ma_3, ma_4, ma_5, ma_6;
+
+    // Get Gyroscope JSON Object
+    json gyro = config.value("gyroscope","No JSON Member 'gyroscope'");
+
+    // Get Gyroscope Bias, Scale Factor and Misalignment
+    json bg = gyro.value("bias","No JSON Member 'gyroscope->bias'");
+    json sfg = gyro.value("scale_factor","No JSON Member 'gyroscope->scale_factor'");
+    json mg = gyro.value("misalignment","No JSON Member 'gyroscope->misalignment'");
+
+    // Get Gyroscope Bias and Set Output
+    double bg_X = bg.value("x_body",0.0);
+    double bg_Y = bg.value("y_body",0.0);
+    double bg_Z = bg.value("z_body",0.0);
+    imuCalibration.bg << bg_X, bg_Y, bg_Z;
+
+    // Get Gyroscope Scale Factor Error and Set Output
+    double sfg_X = sfg.value("x_body",0.0);
+    double sfg_Y = sfg.value("y_body",0.0);
+    double sfg_Z = sfg.value("z_body",0.0);
+    imuCalibration.sfg << sfg_X, sfg_Y, sfg_Z;
+
+    // Get Gyroscope Misalignment and Set Output
+    double mg_1 = mg.value("m1",0.0);
+    double mg_2 = mg.value("m2",0.0);
+    double mg_3 = mg.value("m3",0.0);
+    double mg_4 = mg.value("m4",0.0);
+    double mg_5 = mg.value("m5",0.0);
+    double mg_6 = mg.value("m6",0.0);
+    imuCalibration.mg << mg_1, mg_2, mg_3, mg_4, mg_5, mg_6;
 
     // Successful Return
     return true;

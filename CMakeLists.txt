@@ -46,3 +46,21 @@ target_include_directories(GpsInsNavigation PUBLIC ${PROJECT_SOURCE_DIR}/include
 	                                    PUBLIC ${PROJECT_SOURCE_DIR}/include/util})
 
 # Unit Testing Build
+enable_testing()
+add_executable( test_gps_ins ${PROJECT_SOURCE_DIR}/test/testMain.cpp
+	                     ${PROJECT_SOURCE_DIR}/test/jsonUtilitiesTest.cpp 
+			     ${PROJECT_SOURCE_DIR}/src/util/jsonUtilities.cpp ${HEADER_LIST})
+target_link_libraries(
+  test_gps_ins
+  GTest::gtest_main
+  navigation
+  nlohmann_json::nlohmann_json
+)
+
+# Target Include Directories
+target_include_directories(test_gps_ins PUBLIC ${PROJECT_SOURCE_DIR}/include
+                                        PUBLIC ${PROJECT_SOURCE_DIR}/include/util
+                                        PUBLIC ${EIGEN_INSTALL_PATH})
+
+include(GoogleTest)
+gtest_discover_tests(test_gps_ins)
