@@ -30,10 +30,25 @@ TEST(ParseConfig, ImuCalibration)
     EXPECT_TRUE(ju.parseImuCalibrationConfig(fileName, imuCalibrationData));
 
     // Define Expected Results
-    //Eigen::Vector3d baTruth(3);
-    //baTruth << 1.23, 4.56, 7.89;
+    Eigen::Vector3d baTruth(3);
+    baTruth << 1.23, 4.56, 7.89;
+    Eigen::Vector3d sfaTruth(3);
+    sfaTruth << 2.34, 5.67, 8.91;
+    Eigen::VectorXd maTruth(6);
+    maTruth << 1.12, 2.23, 3.34, 4.45, 5.56, 6.67;
+    Eigen::Vector3d bgTruth(3);
+    bgTruth << -1.23, -4.56, -7.89;
+    Eigen::Vector3d sfgTruth(3);
+    sfgTruth << -2.34, -5.67, -8.91;
+    Eigen::VectorXd mgTruth(6);
+    mgTruth << -1.12, -2.23, -3.34, -4.45, -5.56, -6.67;
 
     // Check Results
-    //EXPECT_EQ(baTruth, imuCalibrationData.ba);
+    EXPECT_EQ(baTruth, imuCalibrationData.ba);
+    EXPECT_EQ(sfaTruth, imuCalibrationData.sfa);
+    EXPECT_EQ(maTruth, imuCalibrationData.ma);
+    EXPECT_EQ(bgTruth, imuCalibrationData.bg);
+    EXPECT_EQ(sfgTruth, imuCalibrationData.sfg);
+    EXPECT_EQ(mgTruth, imuCalibrationData.mg);
 
 }
