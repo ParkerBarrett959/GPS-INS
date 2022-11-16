@@ -13,6 +13,30 @@
 #include <Eigen/Dense>
 #include <string>
 
+// Parse Master Config Unit Test
+TEST(ParseConfig, Master)
+{
+
+    // Create JSON Utilities Object
+    jsonUtilities ju;
+
+    // Create IMU Calibration Data
+    masterConfig_t config;
+
+    // Parse Master Config
+    const std::string fileName = "../test/testData/master_config_unit_test.json";
+
+    // Successfully Parse Master Config 
+    EXPECT_TRUE(ju.parseMasterConfig(fileName, config));
+
+    // Define Expected Results
+    std::string imuCalibrationFileTruth = "../test/testData/imu_calibration_unit_test.json";
+
+    // Check Results
+    EXPECT_EQ(imuCalibrationFileTruth, config.imuCalibrationFile);
+
+}
+
 // Parse IMU Calibration Config Unit Test
 TEST(ParseConfig, ImuCalibration)
 {

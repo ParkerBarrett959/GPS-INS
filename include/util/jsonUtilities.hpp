@@ -22,6 +22,17 @@ class jsonUtilities {
     // Public Class Members/Functions
     public:
         
+        /* @parseMasterConfig
+            Inputs:
+                fileName: std::string of config file name
+            Outputs:
+                masterConfig: masterConfig_t struct containing path to lower level configs
+            Description:
+                Function which parses the Master configuration file
+        */
+        bool parseMasterConfig(const std::string fileName,
+                               masterConfig_t &masterConfig);
+
         /* @parseImuCalibrationConfig
             Inputs:
                 fileName: std::string of config file name

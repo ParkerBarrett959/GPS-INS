@@ -13,6 +13,25 @@
 #include <thread>
 #include "jsonUtilities.hpp"
 
+// Parse Master Configuration File
+bool jsonUtilities::parseMasterConfig(const std::string fileName,
+                                      masterConfig_t &masterConfig) {
+
+    // Read in File
+    json config;
+    if (!parseJson(fileName, config)) {
+        std::cout << "[jsonUtilities::parseMasterConfig] Failed to parse Master Config" << std::endl;
+        return false;
+    }
+
+    // Get IMU Calibration File 
+    masterConfig.imuCalibrationFile = config.value("imu_calibration","");
+
+    // Successful Return
+    return true;
+
+}
+
 // Parse IMU Calibration Configuration File
 bool jsonUtilities::parseImuCalibrationConfig(const std::string fileName,
                                               imuCalibrationData_t &imuCalibration) {
