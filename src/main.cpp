@@ -12,16 +12,36 @@
 
 // Include Headers
 #include <iostream>
+#include <fstream>
 #include <thread>
 #include <queue>
 #include "compensatorThread.hpp"
 #include "strapdownThread.hpp"
 #include "kalmanFilterThread.hpp"
+#include "jsonUtilities.hpp"
 
 // Main GPS-INS Function
 int main(int argc, char **argv) {
 
-    // Unpack Inputs
+    // Unpack Inputs Arguments
+    if (argc != 2) {
+        std::cout << "[main] Invalid arguments - expected ./GPS-INS <master config>" << std::endl;
+        return 1;
+    } else {
+        std::cout << "[main] Master Configuration File: " << argv[1] << std::endl;
+    }
+    const std::string masterConfig = argv[1];
+
+    // Verify Master Configuration File Exists
+    std::ifstream mc;
+    mc.open(masterConfig);
+    if (!mc) {
+        std::cout << "[main] Master Configuration File Specified does not exist" << std::endl;
+        return 1;
+    } 
+
+    // Parse Master Configuration File
+    
 
     // Create Compensator Queues
     std::queue<Eigen::Vector3d> deltaVelQueueIn;

@@ -30,9 +30,11 @@ TEST(ParseConfig, Master)
     EXPECT_TRUE(ju.parseMasterConfig(fileName, config));
 
     // Define Expected Results
-    std::string imuCalibrationFileTruth = "../test/testData/imu_calibration_unit_test.json";
+    std::string configPathTruth = "~/GPS-INS/test/testData/";
+    std::string imuCalibrationFileTruth = "imu_calibration_unit_test.json";
 
     // Check Results
+    EXPECT_EQ(configPathTruth, config.configPath);
     EXPECT_EQ(imuCalibrationFileTruth, config.imuCalibrationFile);
 
 }

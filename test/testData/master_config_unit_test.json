@@ -1,3 +1,4 @@
 {
-    "imu_calibration": "../test/testData/imu_calibration_unit_test.json"
+    "config_path" : "~/GPS-INS/test/testData/",
+    "imu_calibration" : "imu_calibration_unit_test.json"
 }

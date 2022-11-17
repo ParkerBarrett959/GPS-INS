@@ -24,6 +24,9 @@ bool jsonUtilities::parseMasterConfig(const std::string fileName,
         return false;
     }
 
+    // Get Configuration File Path
+    masterConfig.configPath = config.value("config_path","");
+
     // Get IMU Calibration File 
     masterConfig.imuCalibrationFile = config.value("imu_calibration","");
 
