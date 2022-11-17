@@ -41,7 +41,9 @@ int main(int argc, char **argv) {
     } 
 
     // Parse Master Configuration File
-    
+    jsonUtilities ju;
+    masterConfig_t config;
+    ju.parseMasterConfig(masterConfig, config);
 
     // Create Compensator Queues
     std::queue<Eigen::Vector3d> deltaVelQueueIn;
@@ -57,7 +59,7 @@ int main(int argc, char **argv) {
 
     // Measurement Compensator Thread
     compensatorThread ct;
-    std::thread compensatorThread(&compensatorThread::runCompensatorThread, ct);
+    std::thread compensatorThread(&compensatorThread::runCompensatorThread, ct, config);
 
     // Strapdown Integration Thread
     strapdownThread st;

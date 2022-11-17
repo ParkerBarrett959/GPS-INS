@@ -26,7 +26,7 @@ class compensatorThread {
             Description:
                 Function which runs the Compensator thread.
         */
-        bool runCompensatorThread();
+        bool runCompensatorThread(masterConfig_t config);
 
     // Private Class Members/Function
     private:
@@ -50,5 +50,8 @@ class compensatorThread {
 
         // Create JSON Utility Object
         jsonUtilities ju_;
+
+        // Master Configuration File
+        masterConfig_t config_;
 
 };

@@ -44,11 +44,12 @@ bool compensatorThread::init(imuCalibrationData_t &imuCalibration) {
 }
 
 // Run Compensator Thread
-bool compensatorThread::runCompensatorThread() {
+bool compensatorThread::runCompensatorThread(masterConfig_t config) {
     
     // Initialize Compensator
     imuCalibrationData_t imuCalibration;
-    if (!ju_.parseImuCalibrationConfig("../config/imu_calibration_default.json", imuCalibration)) {
+    const std::string calConfig = config.configPath + config.imuCalibrationFile;
+    if (!ju_.parseImuCalibrationConfig(calConfig, imuCalibration)) {
         std::cout << "[compensatorThread::runCompensatorThread] Failed to load compensator data" << std::endl;
         return false;
     }

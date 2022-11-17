@@ -30,6 +30,11 @@ bool jsonUtilities::parseMasterConfig(const std::string fileName,
     // Get IMU Calibration File 
     masterConfig.imuCalibrationFile = config.value("imu_calibration","");
 
+    // Display Results
+    std::cout << "[jsonUtilities::parseMasterConfig] Successfully Parsed Master Configuration File" << std::endl;
+    std::cout << "[jsonUtilities::parseMasterConfig] Config Path: " << masterConfig.configPath << std::endl;
+    std::cout << "[jsonUtilities::parseMasterConfig] IMU Calibration Config: " << masterConfig.imuCalibrationFile << std::endl;
+
     // Successful Return
     return true;
 

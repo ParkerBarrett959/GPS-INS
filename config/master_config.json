@@ -1,4 +1,4 @@
 {
-    "config_path" : "~/GPS-INS/config/",
+    "config_path" : "/home/parkerb7/GPS-INS/config/",
     "imu_calibration" : "imu_calibration_default.json"
 }
