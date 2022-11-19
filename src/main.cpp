@@ -10,15 +10,20 @@
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Include Headers
+// Standard Includes
 #include <iostream>
 #include <fstream>
 #include <thread>
 #include <queue>
+
+// GPS-INS Include Headers
 #include "compensatorThread.hpp"
 #include "strapdownThread.hpp"
 #include "kalmanFilterThread.hpp"
 #include "jsonUtilities.hpp"
+
+// ROS2 Include Headers
+#include "rclcpp/rclcpp.hpp"
 
 // Main GPS-INS Function
 int main(int argc, char **argv) {

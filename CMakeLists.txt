@@ -9,6 +9,8 @@ set(CMAKE_CXX_STANDARD 11)
 
 # External Dependencies
 find_package (Eigen3 3.3 REQUIRED NO_MODULE)
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 include(FetchContent)
 FetchContent_Declare(NavFuse
@@ -36,6 +38,7 @@ add_executable(GpsInsNavigation ${PROJECT_SOURCE_DIR}/src/main.cpp
 				${PROJECT_SOURCE_DIR}/src/strapdownThread.cpp
 				${PROJECT_SOURCE_DIR}/src/kalmanFilterThread.cpp 
 				${PROJECT_SOURCE_DIR}/src/util/jsonUtilities.cpp ${HEADER_LIST})
+ament_target_dependencies(GpsInsNavigation rclcpp)
 
 # Link Libraries
 target_link_libraries(
