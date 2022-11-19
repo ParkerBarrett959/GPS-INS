@@ -28,6 +28,9 @@
 // Main GPS-INS Function
 int main(int argc, char **argv) {
 
+    // Initialize ROS2 Node
+    rclcpp::init(argc, argv);
+
     // Unpack Inputs Arguments
     if (argc != 2) {
         std::cout << "[main] Invalid arguments - expected ./GPS-INS <master config>" << std::endl;
@@ -78,6 +81,9 @@ int main(int argc, char **argv) {
     compensatorThread.join();
     strapdownThread.join();
     kalmanFilterThread.join();
+
+    // Shutdown ROS2 Node
+    rclcpp::shutdown();
     
     // Successful Return
     return 0;
