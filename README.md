@@ -11,6 +11,7 @@ GPS-INS is a robust, unit tested C++ implementation of a GPS-Aided Inertial Navi
 * Eigen (3.3 or greater) <br />
 * GoogleTest <br />
 * NavFuse: https://github.com/ParkerBarrett959/NavFuse <br />
+* nlohmann JSON
 
 # Build
 ```
@@ -18,4 +19,19 @@ mkdir build
 cd build
 cmake ..
 make
+```
+
+# Configuration File Setup
+Prior to running the GPS-INS executable, you must edit the system configuration files to match your build paths on your current system. Two changes are needed. 
+* In GPS-INS/config/master_config.json, set the "config_path" field to the path of the GPS-INS/config directory on your local machine
+* In GPS-INS/test/testData/master_config_unit_test.json, set the "config_path" field to the path of the GPS-INS/test/testData directory on your local machine
+
+# Run Executable
+```
+./GpsInsNavigation </path/to>/GPS-INS/config/master_config.json
+```
+
+# Run Unit Tests
+```
+./test_gps_ins
 ```
